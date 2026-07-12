@@ -44,11 +44,11 @@ def fetchUsertext():
         else:
             input_text = request.form.get("input_text")
 
-        if not data or "input_text" not in data:
+        if not input_text:
             return jsonify({"error": "No text uploaded"}), 400
 
         state = {
-            "input_text": data["input_text"],
+            "input_text":input_text,
             "input_type": "text"
         }
 
