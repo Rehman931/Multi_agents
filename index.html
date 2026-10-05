@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LinkedIn Profile Optimizer</title>
+    <meta
+      name="description"
+      content="AI-powered LinkedIn profile analyzer for resumes, PDFs, and profile text."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="topbar">
+        <div class="brand-wrap">
+          <div class="brand-mark">LI</div>
+          <div>
+            <p class="eyebrow">AI Profile Assistant</p>
+            <h1>LinkedIn Optimizer</h1>
+          </div>
+        </div>
+
+        <div class="status-badges">
+          <span class="status-pill">Live on Render</span>
+          <span class="status-pill subtle">Mini Project</span>
+        </div>
+      </header>
+
+      <div class="feature-strip">
+        <span>Profile Review</span>
+        <span>ATS Scoring</span>
+        <span>Branding Feedback</span>
+        <span>Career Positioning</span>
+      </div>
+
+      <main class="app-card">
+        <section class="panel form-panel">
+          <div class="intro-copy">
+            <p class="mini-label">Smart analysis</p>
+            <h2>Improve your profile in seconds</h2>
+          </div>
+
+          <div class="segmented-control" aria-label="Input mode selector">
+            <button class="mode-btn active" data-mode="file" type="button">Upload PDF</button>
+            <button class="mode-btn" data-mode="text" type="button">Paste text</button>
+          </div>
+
+          <form id="fileForm" class="input-form active" data-mode-form="file">
+            <label class="field-label" for="userFile">Upload your resume or profile PDF</label>
+            <div class="upload-box">
+              <input id="userFile" name="user_file" type="file" accept="application/pdf" />
+              <span class="upload-hint">PDF only • Secure upload</span>
+            </div>
+            <button type="submit" class="primary-btn">Analyze profile</button>
+          </form>
+
+          <form id="textForm" class="input-form" data-mode-form="text">
+            <label class="field-label" for="inputText">Paste profile text or resume content</label>
+            <textarea id="inputText" name="input_text" rows="12" placeholder="Paste your LinkedIn profile, resume text, or bio here..."></textarea>
+            <button type="submit" class="primary-btn">Analyze text</button>
+          </form>
+        </section>
+
+        <section class="panel results-panel">
+          <div id="requestError" class="request-error hidden" role="alert">
+            Service is taking a long time. Please wait 2 minutes, then try again.
+          </div>
+
+          <div id="emptyState" class="empty-state">
+            <div class="empty-icon">✨</div>
+            <h2>Ready to review</h2>
+            <p>Upload a PDF or paste your profile text to generate a stronger LinkedIn presence.</p>
+          </div>
+
+          <div id="results" class="results hidden">
+            <div class="results-heading">
+              <div>
+                <p class="mini-label">Analysis complete</p>
+                <h2>Your profile snapshot</h2>
+                <p class="results-caption">A quick overview of your profile strength and optimization opportunities.</p>
+              </div>
+            </div>
+
+            <div class="scores-grid">
+              <div class="score-card">
+                <span class="score-label">ATS match</span>
+                <div class="score-value"><strong id="atsScore">0</strong><span>/ 100</span></div>
+                <div class="score-track" aria-hidden="true"><span id="atsScoreBar"></span></div>
+              </div>
+              <div class="score-card accent">
+                <span class="score-label">Overall score</span>
+                <div class="score-value"><strong id="finalScore">0</strong><span>/ 100</span></div>
+                <div class="score-track" aria-hidden="true"><span id="finalScoreBar"></span></div>
+              </div>
+            </div>
+
+            <div class="profile-grid">
+              <div class="result-section profile-copy">
+                <h3>Suggested headline</h3>
+                <p id="headlineResult">-</p>
+              </div>
+              <div class="result-section profile-copy">
+                <h3>About</h3>
+                <p id="aboutResult">-</p>
+              </div>
+            </div>
+
+            <div class="profile-grid">
+              <div class="result-section">
+                <h3>Key skills</h3>
+                <div id="skillsResult" class="tag-list"></div>
+              </div>
+              <div class="result-section">
+                <h3>Search keywords</h3>
+                <div id="keywordsResult" class="tag-list subtle"></div>
+              </div>
+            </div>
+
+            <div class="result-section">
+              <h3>Experience highlights</h3>
+              <div id="experienceResult" class="experience-list">-</div>
+            </div>
+
+            <div class="reviews-heading">
+              <p class="mini-label">Next steps</p>
+              <h2>Detailed feedback</h2>
+            </div>
+            <div class="review-grid">
+              <div class="result-section review-box">
+                <h3>Headline Review</h3>
+                <div id="headlineReview" class="review-content">-</div>
+              </div>
+              <div class="result-section review-box">
+                <h3>About Review</h3>
+                <div id="aboutReview" class="review-content">-</div>
+              </div>
+              <div class="result-section review-box">
+                <h3>Branding Review</h3>
+                <div id="brandingReview" class="review-content">-</div>
+              </div>
+              <div class="result-section review-box">
+                <h3>Networking Review</h3>
+                <div id="networkingReview" class="review-content">-</div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <div id="toast" class="toast" aria-live="polite"></div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
