@@ -1,7 +1,12 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 from linkedin_agent import graph
 
 app = Flask(__name__)
+
+# Allow requests from all origins
+CORS(app)
+
 
 @app.route("/formmodel", methods=["POST"])
 def fetchUser():
@@ -9,7 +14,9 @@ def fetchUser():
         file = request.files.get("user_file")
 
         if file is None:
-            return jsonify({"error": "No file uploaded"}), 400
+            return jsonify({
+                "error": "No file uploaded"
+            }), 400
 
         state = {
             "file_path": file.stream,
@@ -33,7 +40,9 @@ def fetchUser():
         })
 
     except Exception as e:
-        return jsonify({"error": str(e)}), 500
+        return jsonify({
+            "error": str(e)
+        }), 500
 
 
 @app.route("/textmodel", methods=["POST"])
@@ -45,10 +54,12 @@ def fetchUsertext():
             input_text = request.form.get("input_text")
 
         if not input_text:
-            return jsonify({"error": "No text uploaded"}), 400
+            return jsonify({
+                "error": "No text uploaded"
+            }), 400
 
         state = {
-            "input_text":input_text,
+            "input_text": input_text,
             "input_type": "text"
         }
 
@@ -69,7 +80,9 @@ def fetchUsertext():
         })
 
     except Exception as e:
-        return jsonify({"error": str(e)}), 500
+        return jsonify({
+            "error": str(e)
+        }), 500
 
 
 if __name__ == "__main__":
