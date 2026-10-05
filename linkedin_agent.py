@@ -11,12 +11,12 @@ from pydantic import BaseModel, Field
 load_dotenv()
 
 llm = ChatGroq(
-    model="meta-llama/llama-4-scout-17b-16e-instruct",
+    model="openai/gpt-oss-120b",
     temperature=0.3
 )
 
 llm1 = ChatGoogleGenerativeAI(
-    model='gemini-3.1-flash-lite',
+    model='gemini-3.5-flash-lite',
     temperature=0.3
 )
 
